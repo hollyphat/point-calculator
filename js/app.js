@@ -214,10 +214,10 @@ var course = 1;
 }
 
 function grades(status){
-	if((status >= 0) && (status < 2.0)){
+	if((status >= 0) && (status < 2.5)){
 		return "Pass";
 	}
-	else if((status >= 2.0) && (status < 3.0)){
+	else if((status >= 2.5) && (status < 3.0)){
 		return "Lower Credit";
 	}
 	else if((status >= 3.0) && (status < 3.5)){
