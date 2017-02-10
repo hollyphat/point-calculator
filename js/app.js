@@ -27,6 +27,10 @@ var total_cummulative_point = 0;
 
 var semester = 1;
 var course = 1;
+var semester_course;
+var semester_gpa;
+semester_course = [];
+semester_gpa = [];
 
 
 
@@ -59,13 +63,13 @@ var course = 1;
 				j += '<input type="text" class="course_in course'+i+'" placeholder="Course Code"></div></div>';*/
 				j += '<p>Course '+i+'</p><div class="row">';
 				j += '<div class="col-60"><div class="item-input item-input-field">';
-				j += '<input type="text" placeholder="Score" class="score_in score'+i+'" maxlength="2">';
+				j += '<input type="number" placeholder="Score" class="score_in score'+i+'" maxlength="2">';
 				j += '</div></div><div class="col-40"><div class="item-input item-input-field">';
-				j += '<input type="text" class="unit_in unit'+i+'" maxlength="1" class="form-control" required="" placeholder="Unit">';
+				j += '<input type="number" class="unit_in unit'+i+'" maxlength="1" class="form-control" required="" placeholder="Unit">';
 				j += '</div></div></div></div></div></li>';				
 
 				$$(".course-list").append(j);
-				$$('.course'+i).focus();
+				$$('.score'+i).focus();
 	    	}
 	    	
 	    	//$$('course1').val('23');
@@ -96,6 +100,16 @@ var course = 1;
 					myApp.alert('Kindly enter a numeric value in all text box', 'Error');
 					return false;
 					//
+				}
+
+				if(scores_array[k] == ""){
+					myApp.alert('Please fill all fields', 'Error');
+					return false;
+				}
+
+				if(unit_array[k] == ""){
+					myApp.alert('Please fill all fields', 'Error');
+					return false;
 				}
 
 				var this_point = units(parseFloat($$('.score'+k).val())) * parseFloat($$('.unit'+k).val());
@@ -156,6 +170,28 @@ var course = 1;
 		ii = 1;
 		$$("#add-semester-course").on('click', function (e) {
 			//myApp.alert("Hi");
+			
+			if(ii >= 15){
+	    		//modal
+	    		myApp.alert('Maximum course is 15', 'Error!');
+	    		//modal
+	    		return false;
+	    	}else{
+	    		ii+=1;
+				var j = '<li class="added sc'+ii+'"><div class="item-content"><div class="item-inner">';
+				/*j += '<p>Course '+i+'</p><div class="row"><div class="col-50">';
+				j += '<div class="item-input item-input-field">';
+				j += '<input type="text" class="course_in course'+i+'" placeholder="Course Code"></div></div>';*/
+				j += '<p>Course '+ii+'</p><div class="row">';
+				j += '<div class="col-60"><div class="item-input item-input-field">';
+				j += '<input type="number" placeholder="Score" class="score_in score_'+semester+'_'+ii+'" maxlength="2">';
+				j += '</div></div><div class="col-40"><div class="item-input item-input-field">';
+				j += '<input type="number" class="unit_in unit_'+semester+'_'+ii+'" maxlength="1" class="form-control" required="" placeholder="Unit">';
+				j += '</div></div></div></div></div></li>';				
+
+				$$(".course-list").append(j);
+				$$('.score_'+semester+'_'+ii).focus();
+	    	}
 		});
 
 		//add-semester
@@ -166,10 +202,143 @@ var course = 1;
 				return false;
 			}
 
-			semester += 1;
-			ii++;
+			for(var k = 1; k<= ii; k++){
+				//console.log($("[data-course='"+k+"']").val());
+				//add course,score and unit to array
+				//course_code_array[k] = $$('.course'+k).val();
+				scores_array[k] = $$('.score_'+semester+'_'+k).val();
+				unit_array[k] = $$('.unit_'+semester+'_'+k).val();
 
+				if(isNaN(scores_array[k])){
+					myApp.alert('Kindly enter a numeric value in all text box', 'Error');
+					return false;
+					//
+				}
+
+				if(isNaN(unit_array[k])){
+					myApp.alert('Kindly enter a numeric value in all text box', 'Error');
+					return false;
+					//
+				}
+
+				if(scores_array[k] == ""){
+					myApp.alert('Please fill all fields', 'Error');
+					return false;
+				}
+
+				if(unit_array[k] == ""){
+					myApp.alert('Please fill all fields', 'Error');
+					return false;
+				}
+
+				var this_point = units(parseFloat($$('.score_'+semester+'_'+k).val())) * parseFloat($$('.unit_'+semester+'_'+k).val());
+				point_array[k] = this_point;
+				total_cummulative_point += point_array[k];
+				aggregrate_units += parseFloat($$('.unit_'+semester+'_'+k).val());
+				
+				var c_gpa = total_cummulative_point/aggregrate_units;
+				semester_gpa[semester] = Math.round(c_gpa * 100) / 100;				
+			}
+
+			/*console.log("Total Point = "+ total_cummulative_point);
+			console.log("aggregrate_units = "+aggregrate_units);
+			console.log("GPA = "+semester_gpa[semester]);*/
+
+			//myApp.alert("Cummulative GPA is "+semester_gpa[semester]);
+
+
+
+			semester_course[semester] = ii;
+			ii = 1;
+			semester += 1;
+			//ii++;
+			
+
+			var j = '<li class="added sc'+ii+'"><div class="item-content"><div class="item-inner">';
+			/*j += '<p>Course '+i+'</p><div class="row"><div class="col-50">';
+			j += '<div class="item-input item-input-field">';
+			j += '<input type="text" class="course_in course'+i+'" placeholder="Course Code"></div></div>';*/
+			j += '<p>Course '+ii+'</p><div class="row">';
+			j += '<div class="col-60"><div class="item-input item-input-field">';
+			j += '<input type="number" placeholder="Score" class="score_in score_'+semester+'_'+ii+'" maxlength="2">';
+			j += '</div></div><div class="col-40"><div class="item-input item-input-field">';
+			j += '<input type="number" class="unit_in unit_'+semester+'_'+ii+'" maxlength="1" class="form-control" required="" placeholder="Unit">';
+			j += '</div></div></div></div></div></li>';				
+
+			$$(".course-list").html(j);
+			$$('.score_'+semester+'_'+i).focus();
 			$$("#semester_name").html(semester);
+		});
+
+
+		$$(".calculate-cgpa").on('click',function(e){
+			e.preventDefault();
+			for(var k = 1; k<= ii; k++){
+				//console.log($("[data-course='"+k+"']").val());
+				//add course,score and unit to array
+				//course_code_array[k] = $$('.course'+k).val();
+				scores_array[k] = $$('.score_'+semester+'_'+k).val();
+				unit_array[k] = $$('.unit_'+semester+'_'+k).val();
+
+				if(isNaN(scores_array[k])){
+					myApp.alert('Kindly enter a numeric value in all text box', 'Error');
+					return false;
+					//
+				}
+
+				if(isNaN(unit_array[k])){
+					myApp.alert('Kindly enter a numeric value in all text box', 'Error');
+					return false;
+					//
+				}
+
+				if(scores_array[k] == ""){
+					myApp.alert('Please fill all fields', 'Error');
+					return false;
+				}
+
+				if(unit_array[k] == ""){
+					myApp.alert('Please fill all fields', 'Error');
+					return false;
+				}
+
+				var this_point = units(parseFloat($$('.score_'+semester+'_'+k).val())) * parseFloat($$('.unit_'+semester+'_'+k).val());
+				point_array[k] = this_point;
+				total_cummulative_point += point_array[k];
+				aggregrate_units += parseFloat($$('.unit_'+semester+'_'+k).val());
+				
+				var c_gpa = total_cummulative_point/aggregrate_units;
+				semester_gpa[semester] = Math.round(c_gpa * 100) / 100;
+			}
+			var gpaGrade = grades(semester_gpa[semester]);
+			myApp.alert("Your Cummulative GPA is "+semester_gpa[semester]+"<br>CGPA Grade is "+ gpaGrade, 'CGPA Result');
+
+			//RETURN ALL VARS
+			aggregrate_units = 0;
+			aggregrate_scores = 0;
+
+			total_cummulative_point = 0;
+
+			semester = 1;
+			ii = 1;
+			semester_course = [];
+			semester_gpa = [];
+
+
+			var j = '<li class="added sc'+ii+'"><div class="item-content"><div class="item-inner">';			
+			j += '<p>Course '+ii+'</p><div class="row">';
+			j += '<div class="col-60"><div class="item-input item-input-field">';
+			j += '<input type="number" placeholder="Score" class="score_in score_'+semester+'_'+ii+'" maxlength="2">';
+			j += '</div></div><div class="col-40"><div class="item-input item-input-field">';
+			j += '<input type="number" class="unit_in unit_'+semester+'_'+ii+'" maxlength="1" class="form-control" required="" placeholder="Unit">';
+			j += '</div></div></div></div></div></li>';				
+
+			$$(".course-list").html(j);
+			$$('.score_'+semester+'_'+i).focus();
+			$$("#semester_name").html(semester);
+			
+
+			
 		});
 
 		$$(".back-link-cgpa").on('click', function (e) {			
