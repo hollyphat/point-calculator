@@ -6,6 +6,13 @@
 html,body{
 	font-family: 'Raleway';
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 #links{
 	position: fixed;
 	width: 100%;
@@ -43,4 +50,8 @@ p{
 
 .list-block{
 	margin: 8px 0 0 0 !important;
+}
+
+.cgpa-list{
+	margin-bottom: 8px;
 }
