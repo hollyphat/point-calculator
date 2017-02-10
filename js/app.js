@@ -69,7 +69,7 @@ semester_gpa = [];
 				j += '</div></div></div></div></div></li>';				
 
 				$$(".course-list").append(j);
-				$$('.score'+i).focus();
+				//$$('.score'+i).focus();
 	    	}
 	    	
 	    	//$$('course1').val('23');
@@ -190,7 +190,7 @@ semester_gpa = [];
 				j += '</div></div></div></div></div></li>';				
 
 				$$(".course-list").append(j);
-				$$('.score_'+semester+'_'+ii).focus();
+				//$$('.score_'+semester+'_'+ii).focus();
 	    	}
 		});
 
@@ -266,7 +266,7 @@ semester_gpa = [];
 			j += '</div></div></div></div></div></li>';				
 
 			$$(".course-list").html(j);
-			$$('.score_'+semester+'_'+i).focus();
+			//$$('.score_'+semester+'_'+i).focus();
 			$$("#semester_name").html(semester);
 		});
 
@@ -334,7 +334,7 @@ semester_gpa = [];
 			j += '</div></div></div></div></div></li>';				
 
 			$$(".course-list").html(j);
-			$$('.score_'+semester+'_'+i).focus();
+			//$$('.score_'+semester+'_'+i).focus();
 			$$("#semester_name").html(semester);
 			
 
