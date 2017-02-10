@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.falcon-consult.pc"
-        version   = "1.0.3">
+        version   = "1.0.4">
 
     <name>Point Calculator</name>
 
@@ -24,8 +24,16 @@
     <!-- Customize your app and platform with the preference element. -->
     <preference name="DisallowOverscroll"         value="true" />
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
-    <preference name="android-minSdkVersion"      value="14" />    
-    <icon src="icon.png" />
+
+    <preference name="fullscreen" value="true" />
+    <preference name="KeepRunning" value="false"/>
+    <preference name="SplashScreen" value="screen"/>
+
+    <preference name="android-minSdkVersion"      value="14" />
+    <!--<preference name="SplashScreenDelay" value="5000" />
+    <plugin name="cordova-plugin-splashscreen" source="npm" />  
+    
+    <splash src="splash.png" />-->
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
