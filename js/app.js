@@ -36,7 +36,8 @@ semester_gpa = [];
 
 	var myApp=new Framework7({
 		modalTitle: 'Point Calculator',
-        material: true
+        material: true,
+        pushState : true
     });
 	
 	var $$=Dom7;
