@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "ng.com.onlinemedia.pc"
-        version   = "1.0.7">
+        version   = "2.0.1">
 
     <name>Point Calculator</name>
 
@@ -30,11 +30,11 @@
     <plugin name="cordova-plugin-splashscreen" source="npm" />  
     
     <splash src="splash.png" />-->
-    <plugin name="cordova-plugin-inappbrowser" source="npm" />
+    <!-- <plugin name="cordova-plugin-inappbrowser" source="npm" /> -->
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <platform name="android">
+    <!-- <platform name="android">
         <allow-intent href="market:*" />
-    </platform>    
+    </platform>     -->
 </widget>
