@@ -34,7 +34,7 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <plugin name="cordova-plugin-google-analytics" spec="~1.8.2" />
+    <!-- <plugin name="cordova-plugin-google-analytics" spec="~1.8.2" /> -->
     <!-- <platform name="android">
         <allow-intent href="market:*" />
     </platform>     -->
